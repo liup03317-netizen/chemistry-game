@@ -5,35 +5,46 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - uses: pnpm/action-setup@v4
         with:
-          version: 9+
+          version: 9
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4.0.4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      - run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+      - run: pnpm run build
         env:
           GITHUB_PAGES: true
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
