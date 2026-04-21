@@ -4,7 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/huaxueshi/',
+  base: process.env.GITHUB_PAGES ? '/chemistry-game/' : '/',
   server: {
     watch: {
       ignored: ['**/.pnpm-store/**', '**/node_modules/**']
@@ -14,13 +14,7 @@ export default defineConfig({
     sourcemap: 'hidden',
   },
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          'react-dev-locator',
-        ],
-      },
-    }),
+    react(),
     tsconfigPaths()
   ],
 })
