@@ -1,57 +1,65 @@
-# React + TypeScript + Vite
+# Chemistry Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个教育化学游戏项目，帮助学生学习化学元素和化学式。
 
-Currently, two official plugins are available:
+## 功能特性
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 化学元素学习
+- 化学式规则讲解
+- 化合价信息
+- 互动游戏模式
+- 错题记录功能
 
-## Expanding the ESLint configuration
+## 技术栈
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- React Router DOM
+- Zustand
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 快速开始
+
+```bash
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
+pnpm run dev
+
+# 构建生产版本
+pnpm run build
+
+# 预览生产版本
+pnpm run preview
+
+# 代码检查
+pnpm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 项目结构
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
+src/
+├── components/     # 组件
+├── hooks/          # 自定义 Hooks
+├── lib/            # 工具库
+├── pages/          # 页面组件
+├── store/          # 状态管理
+├── utils/          # 工具函数
+├── App.tsx         # 应用入口
+├── main.tsx        # 主入口
+└── index.css       # 全局样式
+```
+
+## 部署
+
+项目已配置 GitHub Actions 自动部署到 GitHub Pages。
+
+每次推送到 `main` 分支时，会自动执行构建和部署。
+
+## License
+
+MIT
