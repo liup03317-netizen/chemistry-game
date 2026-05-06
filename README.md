@@ -1,4 +1,4 @@
-# Chemistry Game
+# Chemistry Game（化学式闯关）
 
 一个教育化学游戏项目，帮助学生学习化学元素和化学式。
 
