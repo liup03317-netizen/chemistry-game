@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply overflow-hidden font-sans;
+    @apply overflow-x-hidden overflow-y-auto font-sans;
     background-color: theme('colors.game.dark');
     color: theme('colors.game.light');
     /* Animated radial gradient background */

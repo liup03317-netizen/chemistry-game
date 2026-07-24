@@ -21,7 +21,7 @@ export default function FormulaRules() {
         <div className="w-12" />
       </div>
 
-      <div className="w-full max-w-4xl px-4 overflow-y-auto pb-20 max-h-[80vh] space-y-8 text-white/90">
+      <div className="w-full max-w-4xl px-4 pb-20 space-y-8 text-white/90">
         
         <section className="glass-card p-6 md:p-8">
           <h3 className="text-2xl font-bold text-pink-300 mb-4 border-b border-pink-500/30 pb-2">一、化学式的概念</h3>

@@ -7,6 +7,7 @@ import { PageLayout } from '../components/PageLayout';
 import { useGameStore, useMistakeStore, Difficulty } from '../store';
 import { getRandomQuestions } from '../utils/gameData';
 import { ELEMENTS_SIMPLE, RADICALS, checkAnswer, renderFormula } from '../utils/formulaUtils';
+import { cn } from '../lib/utils';
 
 export default function Game() {
   const { difficulty } = useParams<{ difficulty: string }>();
@@ -214,14 +215,14 @@ export default function Game() {
         </div>
 
         {/* Keyboard */}
-        <div className="w-full glass-card p-4 md:p-6 flex flex-col gap-4">
+        <div className="w-full glass-card p-3 sm:p-4 md:p-6 flex flex-col gap-3 sm:gap-4 select-none">
           {/* Elements Row */}
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="grid grid-cols-8 gap-1.5 sm:gap-2 w-full justify-items-stretch">
             {ELEMENTS_SIMPLE.map(el => (
               <button 
                 key={el} 
                 onClick={() => handleKeyClick(el)}
-                className="glass-btn w-12 h-14 md:w-14 md:h-16 text-xl md:text-2xl hover:bg-blue-500/20 active:bg-blue-500/40"
+                className="glass-btn h-11 sm:h-14 text-base sm:text-xl hover:bg-blue-500/20 active:bg-blue-500/40 w-full"
               >
                 {el}
               </button>
@@ -230,12 +231,12 @@ export default function Game() {
 
           {/* Radicals Row (Challenge only) */}
           {diff === 'challenge' && (
-            <div className="flex flex-wrap justify-center gap-2 mt-2">
+            <div className="grid grid-cols-5 gap-1.5 sm:gap-2 w-full mt-1">
               {RADICALS.map(rad => (
                 <button 
                   key={rad} 
                   onClick={() => handleKeyClick(rad)}
-                  className="glass-btn px-4 h-14 md:h-16 text-xl md:text-2xl hover:bg-purple-500/20 active:bg-purple-500/40"
+                  className="glass-btn h-11 sm:h-14 text-sm sm:text-xl hover:bg-purple-500/20 active:bg-purple-500/40 w-full"
                 >
                   {/* render subscript for radicals, e.g. NH4 -> NH<sub>4</sub> */}
                   {renderFormula(rad)}
@@ -245,36 +246,53 @@ export default function Game() {
           )}
 
           {/* Numbers & Brackets Row */}
-          <div className="flex justify-center gap-2 mt-2">
+          <div className={cn(
+            "grid gap-1.5 sm:gap-2 w-full mt-1",
+            diff === 'challenge' ? "grid-cols-8" : "grid-cols-6"
+          )}>
+            {/* If challenge mode, add left bracket */}
+            {diff === 'challenge' && (
+              <button 
+                onClick={() => handleKeyClick('(')} 
+                className="glass-btn h-10 sm:h-12 text-lg sm:text-xl hover:bg-emerald-500/20 active:bg-emerald-500/40 w-full"
+              >
+                (
+              </button>
+            )}
+            
             {['1', '2', '3', '4', '5', '6'].map(num => (
               <button 
                 key={num} 
                 onClick={() => handleKeyClick(num)}
-                className="glass-btn w-12 h-12 md:w-14 md:h-14 text-xl hover:bg-emerald-500/20 active:bg-emerald-500/40"
+                className="glass-btn h-10 sm:h-12 text-lg hover:bg-emerald-500/20 active:bg-emerald-500/40 w-full"
               >
-                <sub className="text-lg">{num}</sub>
+                <sub className="text-sm sm:text-base">{num}</sub>
               </button>
             ))}
+
+            {/* If challenge mode, add right bracket */}
+            {diff === 'challenge' && (
+              <button 
+                onClick={() => handleKeyClick(')')} 
+                className="glass-btn h-10 sm:h-12 text-lg sm:text-xl hover:bg-emerald-500/20 active:bg-emerald-500/40 w-full"
+              >
+                )
+              </button>
+            )}
           </div>
 
           {/* Controls Row */}
-          <div className="flex justify-center gap-4 mt-4">
-            {diff === 'challenge' && (
-              <div className="flex gap-2 mr-4">
-                <button onClick={() => handleKeyClick('(')} className="glass-btn w-12 h-12 text-2xl">(</button>
-                <button onClick={() => handleKeyClick(')')} className="glass-btn w-12 h-12 text-2xl">)</button>
-              </div>
-            )}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-2 w-full">
             <button 
               onClick={handleDelete}
-              className="glass-btn px-6 h-12 text-lg gap-2 hover:bg-red-500/20 active:bg-red-500/40"
+              className="glass-btn py-3 text-base sm:text-lg gap-2 hover:bg-red-500/20 active:bg-red-500/40 w-full"
             >
               <Delete className="w-5 h-5" />
               删除
             </button>
             <button 
               onClick={handleConfirm}
-              className="glass-btn px-8 h-12 text-lg gap-2 bg-purple-600/30 hover:bg-purple-500/50 active:bg-purple-500/70 font-bold border-purple-400/50"
+              className="glass-btn py-3 text-base sm:text-lg gap-2 bg-purple-600/30 hover:bg-purple-500/50 active:bg-purple-500/70 font-bold border-purple-400/50 w-full"
             >
               <CheckCircle2 className="w-5 h-5" />
               确认

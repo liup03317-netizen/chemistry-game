@@ -40,7 +40,7 @@ export default function Mistakes() {
       </div>
 
       {/* Mistake List */}
-      <div className="w-full max-w-4xl px-4 flex flex-col gap-4 overflow-y-auto pb-20 max-h-[70vh]">
+      <div className="w-full max-w-4xl px-4 flex flex-col gap-4 pb-20">
         {mistakes.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-white/50">
             <AlertCircle className="w-16 h-16 mb-4 opacity-50" />

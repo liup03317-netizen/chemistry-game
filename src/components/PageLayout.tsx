@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '../lib/utils';
 
 export function PageLayout({ children, className = '' }: { children: React.ReactNode, className?: string }) {
   return (
@@ -8,7 +9,7 @@ export function PageLayout({ children, className = '' }: { children: React.React
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`min-h-screen w-full flex flex-col items-center justify-center p-4 relative ${className}`}
+      className={cn("min-h-screen w-full flex flex-col items-center justify-center p-4 relative", className)}
     >
       {/* Decorative border */}
       <div className="absolute inset-4 pointer-events-none rounded-[30px] border border-purple-500/20 shadow-[inset_0_0_50px_rgba(168,85,247,0.1)] z-0" />
